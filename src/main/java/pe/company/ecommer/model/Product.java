@@ -1,6 +1,17 @@
 package pe.company.ecommer.model;
 
-public class Producto {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "products")
+public class Product {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String description;
@@ -8,11 +19,16 @@ public class Producto {
 	private Double precio;
 	private Integer cantidad;
 	
-	public Producto() {
+	//
+	@ManyToOne
+	private Usuario usuario;
+	
+	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Producto(Integer id, String name, String description, String imagen, Double precio, Integer cantidad) {
+	public Product(Integer id, String name, String description, String imagen, Double precio, Integer cantidad,
+			Usuario usuario) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,7 +36,10 @@ public class Producto {
 		this.imagen = imagen;
 		this.precio = precio;
 		this.cantidad = cantidad;
+		this.usuario = usuario;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -70,11 +89,20 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 	//
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	//
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", name=" + name + ", description=" + description + ", imagen=" + imagen
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", imagen=" + imagen
 				+ ", precio=" + precio + ", cantidad=" + cantidad + "]";
 	}
+	
 	
 }

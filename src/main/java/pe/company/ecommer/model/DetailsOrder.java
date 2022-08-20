@@ -1,11 +1,29 @@
 package pe.company.ecommer.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "detailorders")
 public class DetailsOrder {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Double amount;
 	private Double price;
 	private Double total;
+	
+	@OneToOne
+	private Order order;
+	
+	@ManyToOne
+	private Product product;
 	
 	public DetailsOrder() {
 		// TODO Auto-generated constructor stub
@@ -58,6 +76,23 @@ public class DetailsOrder {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+	
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Override

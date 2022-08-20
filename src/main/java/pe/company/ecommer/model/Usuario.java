@@ -1,7 +1,21 @@
 package pe.company.ecommer.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String username;
@@ -10,6 +24,12 @@ public class Usuario {
 	private String direction;
 	private String cellphone;
 	private String rol;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Product> itemProducts = new ArrayList<Product>();
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Order> itemOrders = new ArrayList<Order>();
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -91,8 +111,17 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
 	//imprimimos todos nuestro atiructos en un solo String
 	//es bueno saber que esta imprimiendo en el sistema de dicho objeto
+
+	public Collection<Product> getItemProducts() {
+		return itemProducts;
+	}
+
+	public void setItemProducts(Collection<Product> itemProducts) {
+		this.itemProducts = itemProducts;
+	}
 
 	@Override
 	public String toString() {
